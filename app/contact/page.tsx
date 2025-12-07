@@ -53,9 +53,9 @@ export default function ContactPage() {
                 <div>
                   <h3 className="text-sm uppercase tracking-widest text-muted-foreground mb-4">Office</h3>
                   <p className="text-foreground">
-                    123 Creative Avenue
+                    Biskoman Colony Near Oxygen Hospital
                     <br />
-                    Mumbai, Maharashtra 400001
+                    Patna-7
                     <br />
                     India
                   </p>
@@ -64,14 +64,14 @@ export default function ContactPage() {
                 <div>
                   <h3 className="text-sm uppercase tracking-widest text-muted-foreground mb-4">Email</h3>
                   <a href="mailto:hello@sumirayan.com" className="text-foreground hover:text-primary transition-colors">
-                    hello@sumirayan.com
+                    sumirayandesign@gmail.com
                   </a>
                 </div>
 
                 <div>
                   <h3 className="text-sm uppercase tracking-widest text-muted-foreground mb-4">Phone</h3>
                   <a href="tel:+919876543210" className="text-foreground hover:text-primary transition-colors">
-                    +91 98765 43210
+                    +91 89368 41201
                   </a>
                 </div>
 
