@@ -36,7 +36,7 @@ export const metadata: Metadata = {
     description: "The Best Solution in Your Budget - Premium Creative Agency",
     type: "website",
   },
-    generator: 'v0.app'
+  generator: "v0.app",
 }
 
 export const viewport: Viewport = {
@@ -51,9 +51,14 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className="dark">
-      <body className={`${poppins.variable} ${playfair.variable} font-sans antialiased`}>
-        {children}
+    <html lang="en" className="dark h-full">
+      <body
+        className={`${poppins.variable} ${playfair.variable} font-sans antialiased bg-background text-foreground min-h-screen w-full max-w-full overflow-x-hidden`}
+      >
+        {/* full-width wrapper so content mobile pe squeeze na ho */}
+        <div className="min-h-screen w-full max-w-full">
+          {children}
+        </div>
         <Analytics />
       </body>
     </html>
