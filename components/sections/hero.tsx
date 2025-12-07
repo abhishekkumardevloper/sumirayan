@@ -48,7 +48,7 @@ export function Hero() {
             <span key={i} className="flex items-center gap-8 text-sm text-muted-foreground">
               <span className="flex items-center gap-2">
                 <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
-                Upcoming: Creativity Conference 2025
+                Upcoming: Inter-College Painting competition
               </span>
               <span>•</span>
               <span className="flex items-center gap-2">
