@@ -32,15 +32,26 @@ export function EventsLearnPreview() {
     loadData()
   }, [])
 
-  const formatDate = (dateStr: string) => {
-    return new Date(dateStr).toLocaleDateString("en-US", {
+  // ✅ Date + Time formatter from single venue datetime value
+  const formatDateTime = (dateStr: string) => {
+    const d = new Date(dateStr)
+
+    const date = d.toLocaleDateString("en-US", {
       year: "numeric",
       month: "long",
       day: "numeric",
     })
+
+    const time = d.toLocaleTimeString("en-US", {
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: true,
+    })
+
+    return { date, time }
   }
 
-  // 🔹 Fallback painting competition data
+  // 🔹 Fallback painting competition info
   const fallbackDate = "2025-12-09T11:00:00"
   const fallbackTitle = "Inter-College Painting Competition 2025"
   const fallbackLocation = "Ground, College of Arts & Crafts, Patna"
@@ -52,13 +63,16 @@ export function EventsLearnPreview() {
   const eventDate = upcomingEvent?.date || fallbackDate
   const eventLocation = upcomingEvent?.location || fallbackLocation
 
+  const { date, time } = formatDateTime(eventDate)
+
   if (loading) return null
 
   return (
     <section className="py-12 sm:py-16 md:py-24 relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 lg:gap-8">
-          {/* UPCOMING EVENT */}
+
+          {/* 🔹 UPCOMING EVENT */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -70,12 +84,16 @@ export function EventsLearnPreview() {
                 Upcoming Events
               </h3>
 
-              <Link href="/events" className="text-primary text-xs sm:text-sm font-medium hover:underline min-h-[44px] flex items-center">
+              <Link
+                href="/events"
+                className="text-primary text-xs sm:text-sm font-medium hover:underline min-h-[44px] flex items-center"
+              >
                 View All
               </Link>
             </div>
 
-            <div className="glass rounded-xl sm:rounded-2xl p-5 sm:p-6 md:p-8 h-full relative">
+            <div className="glass rounded-xl sm:rounded-2xl p-5 sm:p-6 md:p-8 h-full">
+
               <span className="inline-block px-2.5 py-1 sm:px-3 rounded-full bg-primary/20 text-primary text-xs font-medium mb-3 sm:mb-4">
                 Upcoming
               </span>
@@ -84,58 +102,56 @@ export function EventsLearnPreview() {
                 {eventTitle}
               </h4>
 
-              <p className="text-muted-foreground mb-3 sm:mb-4 text-sm sm:text-base line-clamp-4 sm:line-clamp-none">
+              <p className="text-muted-foreground mb-3 sm:mb-4 text-sm sm:text-base">
                 {eventDescription}
               </p>
 
               {!upcomingEvent && (
                 <div className="space-y-1 mb-4 text-xs sm:text-sm text-muted-foreground">
                   <p>
-                    <span className="font-semibold">Theme:</span> Bihar &amp; Dr. Rajendra Prasad – One hour, one canvas
+                    <b>Theme:</b> Bihar & Dr. Rajendra Prasad – One hour, one canvas
                   </p>
                   <p>
-                    <span className="font-semibold">Medium:</span> Mix media (any colour medium allowed)
+                    <b>Medium:</b> Mix media (any colour medium allowed)
                   </p>
                   <p>
-                    <span className="font-semibold">Eligibility:</span> Max 5 students per college, individuals welcome
+                    <b>Eligibility:</b> Max 5 students per college, individuals welcome
                   </p>
                   <p>
-                    <span className="font-semibold">Awards:</span> Top 3 medal winners; all participants receive medals & certificates
+                    <b>Awards:</b> Top 3 medal winners + certificates for all
                   </p>
                 </div>
               )}
 
-              <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 text-xs sm:text-sm text-muted-foreground mb-5">
-                <span className="flex items-center gap-2">
-                  📅 {formatDate(eventDate)} – 11:00 AM
-                </span>
-                <span className="flex items-center gap-2">
-                  📍 {eventLocation}
-                </span>
+              {/* ✅ VENUE DATE + LOCATION */}
+              <div className="flex flex-col sm:flex-row gap-2 sm:gap-4 text-xs sm:text-sm text-muted-foreground mb-5">
+                <span>📅 {date} — {time}</span>
+                <span>📍 Venue: {eventLocation}</span>
               </div>
 
-              {/* APPLY NOW BUTTON */}
+              {/* ✅ APPLY BUTTON */}
               <a
                 href={APPLY_LINK}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="
-                  inline-flex items-center justify-center
-                  rounded-lg px-6 py-3
+                  inline-flex w-full sm:w-auto items-center justify-center
+                  px-6 py-3
+                  rounded-lg
                   bg-primary text-primary-foreground
-                  font-semibold text-sm sm:text-base
+                  font-semibold
                   transition-all duration-200
                   hover:scale-[1.03]
                   hover:shadow-lg glow-primary
-                  w-full sm:w-auto
                 "
               >
                 Apply Now →
               </a>
+
             </div>
           </motion.div>
 
-          {/* FROM LEARN (UNCHANGED) */}
+          {/* 🔹 FROM LEARN */}
           <motion.div
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -147,7 +163,10 @@ export function EventsLearnPreview() {
                 From Learn
               </h3>
 
-              <Link href="/learn" className="text-primary text-xs sm:text-sm font-medium hover:underline min-h-[44px] flex items-center">
+              <Link
+                href="/learn"
+                className="text-primary text-xs sm:text-sm font-medium hover:underline min-h-[44px] flex items-center"
+              >
                 View All
               </Link>
             </div>
@@ -155,6 +174,7 @@ export function EventsLearnPreview() {
             {featuredArticle ? (
               <Link href={`/learn/${featuredArticle.slug}`} className="block group">
                 <div className="glass rounded-xl sm:rounded-2xl overflow-hidden h-full">
+
                   <div className="aspect-video relative">
                     <img
                       src={featuredArticle.image_url || "/placeholder.svg"}
@@ -181,6 +201,7 @@ export function EventsLearnPreview() {
                       {featuredArticle.excerpt}
                     </p>
                   </div>
+
                 </div>
               </Link>
             ) : (
@@ -188,7 +209,9 @@ export function EventsLearnPreview() {
                 No featured articles yet.
               </div>
             )}
+
           </motion.div>
+
         </div>
       </div>
     </section>
