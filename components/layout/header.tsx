@@ -124,22 +124,20 @@ export function Header() {
           >
             <div className="h-full flex flex-col">
               <div className="flex items-center justify-between px-4 sm:px-6 lg:px-8 h-16 md:h-20">
-                <Link href="/" onClick={() => setIsMenuOpen(false)} className="flex items-center h-full">
-                  <svg 
-                    viewBox="0 0 800 200" 
-                    xmlns="http://www.w3.org/2000/svg" 
-                    className="h-8 sm:h-12 w-auto max-w-[160px] sm:max-w-none"
-                  >
-                    <circle cx="340" cy="50" r="30" fill="#E53935"/>
-                    <text x="10" y="130" fontFamily="Arial, sans-serif" fontSize="120" fontWeight="bold" fill="#1565C0" letterSpacing="8">
-                      sumirayan
-                    </text>
-                    <path d="M 10 160 Q 400 180 750 160" stroke="#1565C0" strokeWidth="20" fill="none" strokeLinecap="round"/>
-                    <text x="650" y="130" fontFamily="Arial, sans-serif" fontSize="60" fontWeight="bold" fill="#E53935" letterSpacing="2">
-                      DESIGN
-                    </text>
-                  </svg>
-                </Link>
+               <Link
+  href="/"
+  onClick={() => setIsMenuOpen(false)}
+  className="flex items-center h-full"
+>
+  <Image
+    src="sumirayan design.png"     // ✅ put your actual logo image inside /public/ folder
+    alt="Sumirayan Design Logo"
+    width={180}
+    height={60}
+    priority
+    className="h-8 sm:h-12 w-auto max-w-[160px] sm:max-w-none object-contain"
+  />
+</Link>
                 <button
                   onClick={() => setIsMenuOpen(false)}
                   className="w-11 h-11 flex items-center justify-center rounded-full hover:bg-muted transition-colors"
